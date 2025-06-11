@@ -6,7 +6,7 @@ st.set_page_config(page_title="Vida Demo", layout="wide")
 st.sidebar.title("👩🏽‍⚕️ Vida – AI Mental Health Assistant")
 st.sidebar.markdown("Simulated emotional intake demo.")
 
-st.title("🎥 AI Intake Simulation")
+st.title("AI Intake Simulation")
 st.markdown("Meet Vida, your AI assistant. Patients engage in a brief check-in before meeting their clinician.")
 
 # Avatar + Simulated Input
@@ -16,11 +16,11 @@ with col1:
     st.markdown("👋 *Hi, I’m Vida. How have you been feeling lately?*")
 
 with col2:
-    st.text_area("🎤 Simulated Patient Response (Transcript):", 
+    st.text_area("Simulated Patient Response (Transcript):", 
                  "I’ve been okay I guess. Just a bit tired and not sleeping great. It’s been hard to concentrate.")
 
 # Simulated "Run Analysis"
-if st.button("🧠 Run Emotional Analysis"):
+if st.button("Run Emotional Analysis"):
     st.success("Analyzing input...")
 
     st.markdown("---")
