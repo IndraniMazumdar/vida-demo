@@ -4,19 +4,19 @@ import time
 
 st.set_page_config(page_title="Vida Demo", layout="wide")
 
-st.title("🧠 Vida – AI Intake Simulation")
+st.title("Vida – AI Intake Simulation")
 st.markdown("_An emotional intelligence assistant for mental health triage._")
 st.markdown("---")
 
 # Sidebar Patient Selector
-st.sidebar.header("📋 Choose a Sample Patient")
+st.sidebar.header("Choose a Sample Patient")
 selected_patient = st.sidebar.selectbox("Select Patient:", ["Patient A", "Patient B", "Patient C"])
 
 # Define patient profiles
 if selected_patient == "Patient A":
     avatar_path = "static/avatar.png"
     response = "Just been tired, not sleeping well."
-    follow_up = "😴 How has your sleep been recently?"
+    follow_up = "How has your sleep been recently?"
     emotion = "Low Energy"
     sentiment = "Flat"
     gaze = "Downcast"
@@ -28,7 +28,7 @@ Risk level: Low. Recommend monitoring and routine check-in.
 elif selected_patient == "Patient B":
     avatar_path = "static/avatar.png"
     response = "I’ve been anxious lately and on edge."
-    follow_up = "😟 Can you describe what triggers your anxiety lately?"
+    follow_up = "Can you describe what triggers your anxiety lately?"
     emotion = "Mild Anxiety"
     sentiment = "Negative"
     gaze = "Darting"
@@ -40,7 +40,7 @@ Risk level: Moderate. Recommend further screening.
 elif selected_patient == "Patient C":
     avatar_path = "static/avatar.png"
     response = "I can’t focus on anything at work or home."
-    follow_up = "🧠 Have you been struggling with attention at work or school?"
+    follow_up = "Have you been struggling with attention at work or school?"
     emotion = "Distracted"
     sentiment = "Flat"
     gaze = "Unfocused"
@@ -58,8 +58,8 @@ with col1:
     st.image(avatar_path, width=220)
     st.markdown("👋 *Hi, I’m Vida. How have you been feeling lately?*")
 with col2:
-    st.markdown("### 💬 Patient Response")
-    st.markdown(f"🗣️ _{response}_")
+    st.markdown("### Patient Response")
+    st.markdown(f" _{response}_")
 
 # Display Follow-up Question
 st.markdown(
@@ -72,33 +72,33 @@ st.markdown(
 )
 
 st.markdown("---")
-st.header("🔍 AI-Detected Emotional Insights")
+st.header("AI-Detected Emotional Insights")
 
 # Button triggers fake analysis
-if st.button("🧠 Run Emotional Analysis"):
+if st.button("Run Emotional Analysis"):
     with st.spinner("Analyzing patient input..."):
         time.sleep(2)
     st.success("Analysis complete.")
 
     col3, col4, col5 = st.columns(3)
     with col3:
-        st.metric("😐 Facial Emotion", emotion)
-        st.metric("📝 Sentiment", sentiment)
+        st.metric("Facial Emotion", emotion)
+        st.metric("Sentiment", sentiment)
     with col4:
-        st.metric("🗣️ Tone of Voice", "Flat")
-        st.metric("👁️ Gaze", gaze)
+        st.metric("Tone of Voice", "Flat")
+        st.metric("Gaze", gaze)
     with col5:
-        st.metric("⏱️ Speech Rate", "Slow")
-        st.metric("💭 Cognitive Load", "Moderate")
+        st.metric("Speech Rate", "Slow")
+        st.metric("Cognitive Load", "Moderate")
 
 # Always-visible Summary
 st.markdown("---")
 st.header("📋 Editable Clinician Summary")
 
-with st.expander("📝 View Generated Summary"):
+with st.expander("View Generated Summary"):
     st.text_area("Generated Report:", summary.strip(), height=180)
 
-st.button("📤 Export Summary (Coming Soon)")
+st.button("Export Summary (Coming Soon)")
 
 
 
