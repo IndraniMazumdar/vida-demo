@@ -8,11 +8,11 @@ st.title("🧠 Vida – AI Intake Simulation")
 st.markdown("_An emotional intelligence assistant for mental health triage._")
 st.markdown("---")
 
-# Patient Selector
+# Sidebar Patient Selector
 st.sidebar.header("📋 Choose a Sample Patient")
 selected_patient = st.sidebar.selectbox("Select Patient:", ["Patient A", "Patient B", "Patient C"])
 
-# Define sample profiles
+# Define patient profiles
 if selected_patient == "Patient A":
     avatar_path = "static/avatar.png"
     response = "Just been tired, not sleeping well."
@@ -25,7 +25,6 @@ Patient appears fatigued with minimal vocal variation and downward gaze.
 Reports sleep disturbances. No immediate emotional spikes.
 Risk level: Low. Recommend monitoring and routine check-in.
 """
-
 elif selected_patient == "Patient B":
     avatar_path = "static/avatar.png"
     response = "I’ve been anxious lately and on edge."
@@ -38,7 +37,6 @@ Patient shows signs of mild anxiety and restlessness.
 Rapid eye movement and elevated vocal tension observed.
 Risk level: Moderate. Recommend further screening.
 """
-
 elif selected_patient == "Patient C":
     avatar_path = "static/avatar.png"
     response = "I can’t focus on anything at work or home."
@@ -52,19 +50,18 @@ Non-verbal indicators show disengaged posture and low vocal clarity.
 Risk level: Low to Moderate. Recommend cognitive screening.
 """
 
-# Intake Layout
+# Intake UI
 st.header("🧍‍♀️ Patient Check-in")
 
 col1, col2 = st.columns([1, 2])
 with col1:
     st.image(avatar_path, width=220)
     st.markdown("👋 *Hi, I’m Vida. How have you been feeling lately?*")
-
 with col2:
     st.markdown("### 💬 Patient Response")
     st.markdown(f"🗣️ _{response}_")
 
-# Follow-up display
+# Display Follow-up Question
 st.markdown(
     f"""
     <div style='padding: 15px; background-color: #f0f2f6; border-radius: 10px; margin-top: 10px;'>
@@ -77,6 +74,7 @@ st.markdown(
 st.markdown("---")
 st.header("🔍 AI-Detected Emotional Insights")
 
+# Button triggers fake analysis
 if st.button("🧠 Run Emotional Analysis"):
     with st.spinner("Analyzing patient input..."):
         time.sleep(2)
@@ -93,7 +91,7 @@ if st.button("🧠 Run Emotional Analysis"):
         st.metric("⏱️ Speech Rate", "Slow")
         st.metric("💭 Cognitive Load", "Moderate")
 
-# Summary Section
+# Always-visible Summary
 st.markdown("---")
 st.header("📋 Editable Clinician Summary")
 
@@ -101,6 +99,9 @@ with st.expander("📝 View Generated Summary"):
     st.text_area("Generated Report:", summary.strip(), height=180)
 
 st.button("📤 Export Summary (Coming Soon)")
+
+
+
 
 
 
