@@ -3,6 +3,3 @@ streamlit-webrtc
 Pillow
 opencv-python
 numpy
-mediapipe
-whisper
-librosa
