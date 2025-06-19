@@ -1,106 +1,44 @@
 import streamlit as st
 from PIL import Image
+from streamlit_webrtc import webrtc_streamer
 import time
 
-st.set_page_config(page_title="Vida Demo", layout="wide")
-
-st.title("Vida – AI Intake Simulation")
+st.set_page_config(page_title="Vida Advanced Demo", layout="wide")
+st.title("🧠 VIDA: Multimodal Agentic AI Intake")
 st.markdown("_An emotional intelligence assistant for mental health triage._")
 st.markdown("---")
 
-# Sidebar Patient Selector
-st.sidebar.header("Choose a Sample Patient")
-selected_patient = st.sidebar.selectbox("Select Patient:", ["Patient A", "Patient B", "Patient C"])
+# Sidebar
+st.sidebar.header("Select Mode")
+mode = st.sidebar.radio("Mode", ["Live Demo", "Agent Logs", "Clinician Summary"])
 
-# Define patient profiles
-if selected_patient == "Patient A":
-    avatar_path = "static/avatar.png"
-    response = "Just been tired, not sleeping well."
-    follow_up = "How has your sleep been recently?"
-    emotion = "Low Energy"
-    sentiment = "Flat"
-    gaze = "Downcast"
-    summary = """
-Patient appears fatigued with minimal vocal variation and downward gaze.
-Reports sleep disturbances. No immediate emotional spikes.
-Risk level: Low. Recommend monitoring and routine check-in.
-"""
-elif selected_patient == "Patient B":
-    avatar_path = "static/avatar.png"
-    response = "I’ve been anxious lately and on edge."
-    follow_up = "Can you describe what triggers your anxiety lately?"
-    emotion = "Mild Anxiety"
-    sentiment = "Negative"
-    gaze = "Darting"
-    summary = """
-Patient shows signs of mild anxiety and restlessness.
-Rapid eye movement and elevated vocal tension observed.
-Risk level: Moderate. Recommend further screening.
-"""
-elif selected_patient == "Patient C":
-    avatar_path = "static/avatar.png"
-    response = "I can’t focus on anything at work or home."
-    follow_up = "Have you been struggling with attention at work or school?"
-    emotion = "Distracted"
-    sentiment = "Flat"
-    gaze = "Unfocused"
-    summary = """
-Patient reports cognitive distraction and trouble concentrating.
-Non-verbal indicators show disengaged posture and low vocal clarity.
-Risk level: Low to Moderate. Recommend cognitive screening.
-"""
+if mode == "Live Demo":
+    st.header("🎥 Live Video Capture")
+    st.markdown("Recording and analyzing facial emotion and gaze...")
+    webrtc_streamer(key="video")
 
-# Intake UI
-st.header("🧍‍♀️ Patient Check-in")
+    st.header("🎙️ Voice Recording (coming soon)")
+    st.markdown("Record and transcribe patient voice input")
 
-col1, col2 = st.columns([1, 2])
-with col1:
-    st.image(avatar_path, width=220)
-    st.markdown("👋 *Hi, I’m Vida. How have you been feeling lately?*")
-with col2:
-    st.markdown("### Patient Response")
-    st.markdown(f" _{response}_")
+    st.header("💬 Text Prompt")
+    user_input = st.text_input("Patient response:", "")
+    if user_input:
+        st.write(f"Transcribed Text: {user_input}")
+        # Here you'd run your NLP Agent
 
-# Display Follow-up Question
-st.markdown(
-    f"""
-    <div style='padding: 15px; background-color: #f0f2f6; border-radius: 10px; margin-top: 10px;'>
-        <b>Follow-up Question:</b><br>{follow_up}
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+elif mode == "Agent Logs":
+    st.header("🧠 Agent Outputs (Simulated)")
+    st.json({
+        "Emotion Agent": {"emotion": "Sad", "confidence": 0.76},
+        "Speech Agent": {"tone": "Flat", "speech_rate": "Slow"},
+        "Gaze Agent": {"gaze_direction": "Downcast", "blinks_per_min": 12},
+        "NLP Agent": {"sentiment": "Negative", "keywords": ["anxiety", "tired"]}
+    })
 
-st.markdown("---")
-st.header("AI-Detected Emotional Insights")
-
-# Button triggers fake analysis
-if st.button("Run Emotional Analysis"):
-    with st.spinner("Analyzing patient input..."):
-        time.sleep(2)
-    st.success("Analysis complete.")
-
-    col3, col4, col5 = st.columns(3)
-    with col3:
-        st.metric("Facial Emotion", emotion)
-        st.metric("Sentiment", sentiment)
-    with col4:
-        st.metric("Tone of Voice", "Flat")
-        st.metric("Gaze", gaze)
-    with col5:
-        st.metric("Speech Rate", "Slow")
-        st.metric("Cognitive Load", "Moderate")
-
-# Always-visible Summary
-st.markdown("---")
-st.header("📋 Editable Clinician Summary")
-
-with st.expander("View Generated Summary"):
-    st.text_area("Generated Report:", summary.strip(), height=180)
-
-st.button("Export Summary (Coming Soon)")
-
-
+elif mode == "Clinician Summary":
+    st.header("📋 Final Editable Summary")
+    st.text_area("Summary:", "Patient displays signs of low mood with flat affect and downcast gaze.", height=200)
+    st.button("Submit Summary")
 
 
 
